@@ -5,22 +5,22 @@ kubeVersion: ">=1.26.0-0"
 name: linkwarden
 version: 0.0.1
 dependencies:
-    -   name: postgresql
-        repository: https://charts.bitnami.com/bitnami
-        condition: postgresql.enabled
-        version: 18.2.3
+  - name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+    version: 18.2.3
 description: Linkwarden is an open-source collaborative bookmark manager to collect, organize and preserve webpages
 home: https://linkwarden.app/
 icon: https://raw.githubusercontent.com/linkwarden/linkwarden/4640c1c966d37b7fc22e4ebfcb244d03da1d6d82/assets/logo.png
 keywords:
-    - bookmarks
-    - archival
-    - collaboration
-    - linkding
-    - linkace
-    - archivebox
+  - bookmarks
+  - archival
+  - collaboration
+  - linkding
+  - linkace
+  - archivebox
 sources:
-    - "https://github.com/nekanu/helm-charts"
+  - "https://github.com/nekanu/helm-charts"
 maintainers:
-    -   name: Nekanu
-        email: development@nekanu.com
+  - name: Nekanu
+    email: development@nekanu.com

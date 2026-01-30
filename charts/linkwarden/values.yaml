@@ -19,7 +19,7 @@
 image:
     registry: ghcr.io
     repository: linkwarden/linkwarden
-    tag: "v2.5.3"
+    tag: "v2.13.5"
     digest: ""
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -56,7 +56,7 @@ linkwarden:
     ## @param linkwarden.replicas [default: 1] The number of Linkwarden replicas (pods) to deploy
     ##
     replicas: 1
-
+    
     ## @param linkwarden.domain [string] The domain name to assign to Linkwarden, to be re-used as the NextAuth URL and
     ## as the 'host' entry within the Ingress configuration
     ##
@@ -104,7 +104,7 @@ linkwarden:
     ## @param linkwarden.ignoreHTTPSErrors [default: false] Chromium to ignore SSL errors; this is useful to support generation of browser screenshots from sources with self-signed certificates or untrusted CAs
     ##
     ignoreHTTPSErrors: false
-
+    
     ## Paths to use inside the applications' container for file storage.
     ##
     data:
@@ -132,7 +132,7 @@ linkwarden:
                 ## @param linkwarden.data.filesystem.pvc.existingClaim [string] Provide the name to an existing PVC
                 ##
                 existingClaim: ""
-
+        
         ## S3 data settings
         ##
         s3:
@@ -157,7 +157,7 @@ linkwarden:
             ## @param linkwarden.data.s3.existingSecret [string] The name of an existing Secret with `accessKey` and `secretKey` keys
             ##
             existingSecret: ""
-
+    
     ## Linkwarden Database settings
     ##
     database:
@@ -183,22 +183,22 @@ linkwarden:
         ## @param linkwarden.database.existingSecret [string] The name of the existing secret containing the fully qualified PostgreSQL uri under a `uri` key
         ##
         existingSecret: ""
-
+    
     ## Authentication settings
     ##
     auth:
         ## @param linkwarden.auth.disableRegistration [default: false] Disable registration for Linkwarden
         ##
         disableRegistration: false
-
+        
         ## @param linkwarden.auth.enableCredentials [default: true] Enable credential logins for Linkwarden
         ##
         enableCredentials: true
-
+        
         ## @param linkwarden.auth.disableNewSSOUsers [default: false] Disable new SSO users
         ##
         disableNewSSOUsers: false
-
+        
         ## SSO Providers
         ## Officially supported and tested are only Authentik and Keycloak other SSO providers are solely provided for completeness
         ## ref: https://docs.linkwarden.app/self-hosting/sso-oauth
@@ -214,19 +214,19 @@ linkwarden:
         #   customName: "keycloak-custom"
         #   issuer: "keycloak"
         #   existingSecret: "keycloak-creds"
-
+    
     ## SMTP settings
     ##
     smtp:
         ## @param linkwarden.smtp.enabled [default: false] Enable email integration within Linkwarden
         ##
         enabled: false
-
+        
         ## The email address from which Linkwarden will send mails e.g.: "linkwarden@domain.tld"
         ## @param linkwarden.smtp.fromAddress [string] The address from which Linkwarden should send emails
         ##
         fromAddress: ""
-
+        
         ## The mail server from which Linkwarden will send mails e.g.: "mx.domain.tld"
         ## @param linkwarden.smtp.server [string] The server from which Linkwarden should send emails
         ##

@@ -15,64 +15,64 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-    name: {{ $fullName }}
-    namespace: {{ .Release.Namespace }}
-    labels:
+  name: {{ $fullName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
     {{- include "linkwarden.labels" . | nindent 4 }}
   {{- if .Values.ingress.annotations }}
-    annotations:
+  annotations:
     {{- toYaml .Values.ingress.annotations | nindent 4 }}
   {{- end }}
 spec:
   {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-    ingressClassName: {{ .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
   {{- if .Values.ingress.tls }}
-    tls:
+  tls:
     {{- range .Values.ingress.tls }}
-        -   hosts:
+    - hosts:
         {{- range .hosts }}
-                - {{ . | quote }}
+        - {{ . | quote }}
         {{- end }}
-            secretName: {{ .secretName }}
+      secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
-    rules:
-        -   host: {{ .Values.linkwarden.domain | quote }}
-            http:
-                paths:
-                    -   path: /
+  rules:
+    - host: {{ .Values.linkwarden.domain | quote }}
+      http:
+        paths:
+          - path: /
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-                        pathType: Prefix
+            pathType: Prefix
             {{- end }}
-                        backend:
+            backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-                            service:
-                                name: {{ $fullName }}
-                                port:
-                                    number: {{ $svcPort }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
               {{- else }}
-                            serviceName: {{ $fullName }}
-                            servicePort: {{ $svcPort }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
               {{- end }}
     {{- range .Values.ingress.extraHosts }}
-        -   host: {{ .host | quote }}
-            http:
-                paths:
+    - host: {{ .host | quote }}
+      http:
+        paths:
           {{- range .paths }}
-                    -   path: {{ .path }}
+          - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-                        pathType: {{ .pathType }}
+            pathType: {{ .pathType }}
             {{- end }}
-                        backend:
+            backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-                            service:
-                                name: {{ $fullName }}
-                                port:
-                                    number: {{ $svcPort }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
               {{- else }}
-                            serviceName: {{ $fullName }}
-                            servicePort: {{ $svcPort }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
     {{- end }}
